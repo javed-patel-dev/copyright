@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agreement</title>
+    <style>
+      .body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: white;
+      }
+      span{
+        color: black;
+        font-weight: bold;
+      }
+      .images-container {
+        margin-top: 5%;
+        display: flex;
+        justify-content: center; /* Center the images horizontally */
+        gap: 20px; /* Add a gap between the images */
+      }
+
+      .img-div {
+        padding: 1%;
+        width: 200px; /* Set a fixed width for the image container */
+        height: 200px; /* Set a fixed height for the image container */
+        display: flex;
+        justify-content: center; /* Center the image vertically */
+        align-items: center; /* Center the image horizontally */
+        border: 1px solid #ccc; /* Add a border to the image container */
+      }
+
+      .img {
+        max-width: 100%; /* Make the image fit within its container */
+        max-height: 100%; /* Make the image fit within its container */
+        display: block; /* Remove extra space below the image */
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      Dear <span> <%= data.name%></span>,
+      
+      <div class="images-container">
+        <div class="img-div">
+          <img src=<%= data.aadhar%> class="img" alt="aadhar front img" />
+        </div>
+        <!-- <div class="img-div">
+          <img src=<%= data.pan%> class="img" alt="pan front img" />
+        </div> -->
+        <div class="img-div">
+          <img src=<%= data.sign%> class="img" alt="sign of user" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
