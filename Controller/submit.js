@@ -9,12 +9,25 @@ Submit = async (req, res) => {
     const incAmount = randomNumber > 90 ? 40 : 5;
 
     const page = Number(req.body.page);
-    await Users.findByIdAndUpdate(
-      req.body.id,
-      { $inc: { wallet: incAmount }, $push: { completedWork: page }, $pull : { pendingWork: page} },
-      { new: true }
-    );
-    res.status(200).send({incVal:incAmount});
+    const userId = req.body.id;
+
+    const user = await Users.findById(userId);
+
+    if (user.pendingWork.includes(page)) {
+      await Users.findByIdAndUpdate(
+        userId,
+        {
+          $inc: { wallet: incAmount },
+          $push: { completedWork: page },
+          $pull: { pendingWork: page },
+        },
+        { new: true }
+      );
+
+      res.status(200).send({ incVal: incAmount });
+    } else {
+      res.status(200).send({ message: "Page number not found in pending work" });
+    }
   } catch (err) {
     res.status(500).send({ message: err.message });
   }

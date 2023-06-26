@@ -9,7 +9,6 @@ const authenticateUser = async (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const user = await Users.findById(decoded.token);
-    console.log(user)
     if (!user) return res.status(500).send({ message: "Invalid token" });
 
     if (user.isLoggedIn === false)
