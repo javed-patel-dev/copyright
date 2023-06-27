@@ -53,9 +53,19 @@
         font-weight: bold;
         color: black;
       }
-      .underscore{
+      .underscore {
         text-align: center;
-        color: rgb(30, 124, 255)
+        color: rgb(30, 124, 255);
+      }
+      .title-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .title-img img {
+        max-width: 100%;
+        max-height: 100%;
       }
     </style>
   </head>
@@ -361,9 +371,11 @@
         <br />
         <br />
         <br />
-        <span class="bold"> I ACCEPT ALL TERMS AND CONDITION</span><div class="img-sign">
-          <img src=<%=data.sign%> class="img" alt="sign of user" />
-        </div><br />
+        <span class="bold"> I ACCEPT ALL TERMS AND CONDITION</span>
+        <div class="img-sign">
+          <img src="<%" ="data.sign%" /> class="img" alt="sign of user" />
+        </div>
+        <br />
         <br />
         <br />
         <br />
@@ -380,7 +392,7 @@
         <span class="bold"
           >Aadhaar Card Front:
           <div class="img-div">
-            <img src=<%=data.aadhar%> class="img" alt="sign of user" />
+            <img src="<%" ="data.aadhar%" /> class="img" alt="sign of user" />
           </div>
         </span>
         <br />
@@ -391,8 +403,8 @@
         <span class="bold"
           >Aadhaar Card Back:
           <div class="img-div">
-            <img src=<%=data.aadharBack%> class="img" alt="aadhar front img"
-            />
+            <img src="<%" ="data.aadharBack%" /> class="img" alt="aadhar front
+            img" />
           </div>
         </span>
       </span>
