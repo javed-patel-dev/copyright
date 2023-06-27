@@ -38,16 +38,6 @@ const customerSchema = new mongoose.Schema(
       default: "",
       required: true,
     },
-    panFront: {
-      type: String,
-      default: "",
-      required: true,
-    },
-    panBack: {
-      type: String,
-      default: "",
-      required: true,
-    },
     signOfUser: {
       type: String,
       default: "",

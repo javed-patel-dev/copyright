@@ -21,7 +21,7 @@ sendMailSeparately = async (req, res) => {
     ejsData.name = existingUser.name;
     ejsData.address = convertAddressToString(existingUser.address);
     ejsData.aadhar = existingUser.aadharFront;
-    ejsData.pan = existingUser.panFront;
+    ejsData.aadharBack = existingUser.aadharBack;
     ejsData.sign = existingUser.signOfUser;
 
     let ejsFile = await ejs.renderFile(ejsData.path, {
