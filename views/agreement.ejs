@@ -28,7 +28,16 @@
         padding: 1%;
         width: 200px; /* Set a fixed width for the image container */
         height: 200px; /* Set a fixed height for the image container */
-        display: inline;
+        display: flex;
+        justify-content: center; /* Center the image vertically */
+        align-items: center; /* Center the image horizontally */
+        border: 1px solid #ccc; /* Add a border to the image container */
+      }
+      .img-sign {
+        padding: 1%;
+        width: 300px; /* Set a fixed width for the image container */
+        height: 60px; /* Set a fixed height for the image container */
+        display: flex;
         justify-content: center; /* Center the image vertically */
         align-items: center; /* Center the image horizontally */
         border: 1px solid #ccc; /* Add a border to the image container */
@@ -352,7 +361,7 @@
         <br />
         <br />
         <br />
-        <span class="bold"> I ACCEPT ALL TERMS AND CONDITION</span><div class="img-div">
+        <span class="bold"> I ACCEPT ALL TERMS AND CONDITION</span><div class="img-sign">
           <img src=<%=data.sign%> class="img" alt="sign of user" />
         </div><br />
         <br />
