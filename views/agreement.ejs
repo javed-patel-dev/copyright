@@ -40,17 +40,22 @@
     }
 
     .image-container {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 20px;
+      position: relative;
+      width: 200px;
+      height: 200px;
+      border: 1px solid #ccc;
+      overflow: hidden;
     }
 
     .image-container img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       max-width: 100%;
-      height: auto;
+      max-height: 100%;
     }
+
 
     .bold {
       font-weight: bold;
@@ -81,8 +86,9 @@
     }
 
     .signature-img img {
-      max-width: 200px;
-      max-height: 60px;
+      border: 1px solid grey;
+      max-width: 600px;
+      max-height: 100px;
       margin-bottom: 20px;
     }
 
@@ -381,8 +387,10 @@
       <br />
       <br />
       <span class="bold"> I ACCEPT ALL TERMS AND CONDITION</span>
-      <div class="img-sign">
-        <img src=<%=data.sign%> class="img" alt="sign of user" />
+      <div class="signature-img">
+        <!-- <img src=<%=data.sign%> class="img" alt="sign of user" /> -->
+        <img src="https://static.cdn.wisestamp.com/wp-content/uploads/2020/08/Oprah-Winfrey-Signature-1.png" class="img"
+          alt="sign of user" />
       </div>
       <br />
       <br />
@@ -399,8 +407,8 @@
       <br />
       <br />
       <span class="bold">Aadhaar Card Front:
-        <div class="img-div">
-          <img src=<%=data.aadhar%> class="img" alt="sign of user" />
+        <div class="image-container">
+          <img src=<%=data.aadhar%> class="img" alt="aadhar front image" />
         </div>
       </span>
       <br />
@@ -409,9 +417,8 @@
       <br />
       <br />
       <span class="bold">Aadhaar Card Back:
-        <div class="img-div">
-          <img src=<%=data.aadharBack%> class="img" alt="aadhar front
-          img" />
+        <div class="image-container">
+          <img src=<%=data.aadharBack%> class="img" alt="aadhar back image" />
         </div>
       </span>
     </span>
