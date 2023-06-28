@@ -11,8 +11,11 @@ LoginUser = async (req, res) => {
     // const isMatch = await bcrypt.compare(req.body.password, user.password);
     const password = await decryptPassword(user.password);
     if (!user || password !== req.body.password) 
-      return res.status(401).json({ error: "Invalid email or password" });
+      return res.status(200).json({ error: "Invalid email or password" });
 
+    if (user.isLoggedIn === true)
+      return res.status(200).send({ message: "User is logged in" });
+      
     if (user.agreementAccepted === false)
       return res.status(200).send({ message: "Agreement" , _id:user._id });
 
