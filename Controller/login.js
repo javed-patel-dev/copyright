@@ -2,7 +2,7 @@ const Users = require("../Models/userSchema");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 // const bcrypt = require("bcrypt");
-const { decryptPassword } = require("./passwordEncryptDecrypt")
+const { decryptPassword } = require("./passwordEncryptDecrypt");
 
 LoginUser = async (req, res) => {
   try {
@@ -10,14 +10,25 @@ LoginUser = async (req, res) => {
     let user = await Users.findOne({ email: email });
     // const isMatch = await bcrypt.compare(req.body.password, user.password);
     const password = await decryptPassword(user.password);
-    if (!user || password !== req.body.password) 
+    if (!user || password !== req.body.password)
       return res.status(200).json({ error: "Invalid email or password" });
 
     if (user.isLoggedIn === true)
       return res.status(200).send({ message: "User is logged in" });
-      
+
     if (user.agreementAccepted === false)
-      return res.status(200).send({ message: "Agreement" , _id:user._id });
+      return res.status(200).send({
+        message: "Agreement",
+        data: {
+          _id: user._id,
+          name: user.name,
+          startDate: user.startDate,
+          address: user.address,
+          aadharFront: user.aadharFront,
+          aadharBack: user.aadharBack,
+          signOfUser: user.signOfUser,
+        },
+      });
 
     if (user.is_Active === false)
       return res.status(200).send({ message: "Pending Approval" });
@@ -28,7 +39,7 @@ LoginUser = async (req, res) => {
     await Users.findOneAndUpdate(
       { _id: user._id },
       { $set: { isLoggedIn: true, ipAddress: ipAddress } },
-      {new:true}
+      { new: true }
     );
 
     user = await Users.findOne({ _id: user._id });
@@ -42,12 +53,12 @@ LoginUser = async (req, res) => {
         email: user.email,
         userType: user.userType,
         startDate: user.startDate,
-        endDate:user.endDate,
-        completedWork:user.completedWork,
-        pendingWork:user.pendingWork,
+        endDate: user.endDate,
+        completedWork: user.completedWork,
+        pendingWork: user.pendingWork,
         agreementAccepted: user.agreementAccepted,
         wallet: user.wallet,
-        token: jwt.sign({ token: user._id }, process.env.JWT_SECRET_KEY)
+        token: jwt.sign({ token: user._id }, process.env.JWT_SECRET_KEY),
       },
     });
   } catch (err) {

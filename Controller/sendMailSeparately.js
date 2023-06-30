@@ -23,6 +23,7 @@ sendMailSeparately = async (req, res) => {
     ejsData.aadhar = existingUser.aadharFront;
     ejsData.aadharBack = existingUser.aadharBack;
     ejsData.sign = existingUser.signOfUser;
+    ejsData.date = existingUser.startDate;
 
     let ejsFile = await ejs.renderFile(ejsData.path, {
       data: ejsData,

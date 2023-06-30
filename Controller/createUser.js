@@ -90,6 +90,7 @@ async function sendAgreement(user , body) {
     ejsData.aadhar = user.aadharFront;
     ejsData.aadharBack = user.aadharBack;
     ejsData.sign = user.signOfUser;
+    ejsData.date = user.startDate;
 
     let ejsFile = await ejs.renderFile(ejsData.path, {
       data: ejsData,
