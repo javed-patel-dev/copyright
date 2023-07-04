@@ -13,7 +13,7 @@ LoginUser = async (req, res) => {
     if (!user || password !== req.body.password)
       return res.status(200).json({ error: "Invalid email or password" });
 
-    if (user.isLoggedIn === true)
+    if (user.userType === "user" && user.isLoggedIn === true)
       return res.status(200).send({ message: "User is logged in" });
 
     if (user.agreementAccepted === false)
