@@ -24,10 +24,10 @@ async function sendEmailWithAttachment(email, subject, html) {
       attachments: [attachment],
     };
     await sgMail.send(mailOptions);
+    console.log("Mail sent successfully")
     return true;
   } catch (error) {
-    logger.error("Error sending email", error);
-    //console.log(error)
+    console.error("Error sending email", error);
     return false;
   }
 }

@@ -25,7 +25,8 @@ const customerSchema = new mongoose.Schema(
       required: true,
     },
     address: {
-      type: Object,
+      type: String,
+      default: "",
       required: true,
     },
     aadharFront: {

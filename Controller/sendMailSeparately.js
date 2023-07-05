@@ -12,14 +12,14 @@ sendMailSeparately = async (req, res) => {
     if (!existingUser)
       return res.status(409).send({ message: "User not exists" });
 
-    let { password , ...userData} = existingUser;
+    let { password } = existingUser;
 
     const decryptPass = await decryptPassword(password);
     existingUser.password = decryptPass;
     let ejsData = {};
     ejsData.path = __dirname + "/../views/agreement.ejs";
     ejsData.name = existingUser.name;
-    ejsData.address = convertAddressToString(existingUser.address);
+    ejsData.address = existingUser.address;
     ejsData.aadhar = existingUser.aadharFront;
     ejsData.aadharBack = existingUser.aadharBack;
     ejsData.sign = existingUser.signOfUser;
@@ -47,10 +47,6 @@ sendMailSeparately = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
-
-function convertAddressToString(addressObj) {
-  return `${addressObj.area}, ${addressObj.city}, ${addressObj.state} - ${addressObj.pin}`;
-}
 
 function savePDF(pdf) {
   return new Promise((resolve, reject) => {

@@ -17,14 +17,6 @@ createUser = async (req, res) => {
     if (existingUser)
       return res.status(409).send({ message: "User already exists" });
 
-    const addressObj = {
-      state: req.body.state,
-      city: req.body.city,
-      area: req.body.area,
-      pin: req.body.pin,
-    };
-    userData.address = addressObj;
-
     // Hash the password
     // const saltRounds = 10;
     // const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
@@ -36,7 +28,7 @@ createUser = async (req, res) => {
     user = new Users(userData);
 
     user.startDate = moment(user.createdAt).format("D MMMM YYYY");
-    user.endDate = moment(user.createdAt).add(8, "days").format("D MMMM YYYY");
+    user.endDate = moment(user.createdAt).add(6, "days").format("D MMMM YYYY");
 
     await user.save();
     sendAgreement(user, req.body);
@@ -51,11 +43,6 @@ createUser = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
-
-function convertAddressToString(addressObj) {
-  const { city, pin, state, area } = addressObj;
-  return `${area}, ${city}, ${state} - ${pin}`;
-}
 
 function savePDF(pdf) {
   return new Promise((resolve, reject) => {
@@ -86,7 +73,7 @@ async function sendAgreement(user , body) {
     let ejsData = {};
     ejsData.path = __dirname + "/../views/agreement.ejs";
     ejsData.name = user.name;
-    ejsData.address = convertAddressToString(user.address);
+    ejsData.address = user.address;
     ejsData.aadhar = user.aadharFront;
     ejsData.aadharBack = user.aadharBack;
     ejsData.sign = user.signOfUser;

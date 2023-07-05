@@ -4,24 +4,61 @@ const QCReportSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      default: ""
     },
-    email:{
+    phone: {
+      type: Number,
+    },
+    email: {
       type: String,
-      default: ""
     },
-    password:{
-        type: String,
-        default: ""
+    password: {
+      type: String,
+    },
+    address: {
+      type: String,      
+    },
+    aadharFront: {
+      type: String,      
+    },
+    aadharBack: {
+      type: String,      
+    },
+    signOfUser: {
+      type: String,      
+    },
+    wallet: {
+      type: Number,
+    },
+    is_Active: {
+      type: Boolean,
+    },
+    agreementAccepted: {
+      type: Boolean,
+    },
+    startDate: {
+      type: String,
+    },
+    endDate: {
+      type: String,
+    },
+    isLoggedIn: {
+      type: Boolean,
+    },
+    mailSend: {
+      type: Boolean,
+    },
+    userType: {
+      type: String,
+    },
+    ipAddress: {
+      type: String,
     },
     completedWork: {
-        type: Array,
-        default: []
+      type: Array,
     },
     pendingWork: {
-        type: Array,
-        default: []
-    }
+      type: Array,
+    },
   },
   { timestamps: true }
 );
