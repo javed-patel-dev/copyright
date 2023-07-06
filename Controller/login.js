@@ -43,11 +43,25 @@ LoginUser = async (req, res) => {
     );
 
     user = await Users.findOne({ _id: user._id });
-    const { password, ...userDetails } = user.toObject();
     res.status(200).send({
       message: `${user.name} has been logged in successfully`,
       data: {
-        userDetails,
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        startDate: user.startDate,
+        endDate: user.endDate,
+        address: user.address,
+        aadharFront: user.aadharFront,
+        aadharBack: user.aadharBack,
+        signOfUser: user.signOfUser,
+        wallet : user.wallet,
+        completedWord: user.completedWork,
+        pendingWork: user.pendingWork,
+        isActive: user.is_Active,
+        userType: user.userType,
+        agreementAccepted: user.agreementAccepted,
         token: jwt.sign({ token: user._id }, process.env.JWT_SECRET_KEY),
       },
     });
