@@ -9,8 +9,8 @@ LoginUser = async (req, res) => {
     const email = req.body.email;
     let user = await Users.findOne({ email: email });
     // const isMatch = await bcrypt.compare(req.body.password, user.password);
-    const password = await decryptPassword(user.password);
-    if (!user || password !== req.body.password)
+    const userPassword = await decryptPassword(user.password);
+    if (!user || userPassword !== req.body.password)
       return res.status(200).json({ error: "Invalid email or password" });
 
     if (user.userType === "user" && user.isLoggedIn === true)
@@ -43,21 +43,11 @@ LoginUser = async (req, res) => {
     );
 
     user = await Users.findOne({ _id: user._id });
-
+    const { password, ...userDetails } = user.toObject();
     res.status(200).send({
       message: `${user.name} has been logged in successfully`,
       data: {
-        _id: user._id,
-        name: user.name,
-        phone: user.phone,
-        email: user.email,
-        userType: user.userType,
-        startDate: user.startDate,
-        endDate: user.endDate,
-        completedWork: user.completedWork,
-        pendingWork: user.pendingWork,
-        agreementAccepted: user.agreementAccepted,
-        wallet: user.wallet,
+        userDetails,
         token: jwt.sign({ token: user._id }, process.env.JWT_SECRET_KEY),
       },
     });
