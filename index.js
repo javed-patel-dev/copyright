@@ -13,8 +13,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 const { authenticateAdmin, authenticateUser } = require("./Middleware/auth");
-const QCReport_router = require("./Routes/QCReport")
-const activateUserRouter = require("./Routes/getUserDetails").activateUserRouter;
+const QCReport_router = require("./Routes/QCReport");
+const activateUserRouter =
+  require("./Routes/getUserDetails").activateUserRouter;
 const pendingUserRouter = require("./Routes/getUserDetails").pendingUserRouter;
 const create_user_router = require("./Routes/createUser");
 const login_user_router = require("./Routes/login");
@@ -51,5 +52,29 @@ app.use("/submit", authenticateUser, submit_router);
 app.use("/changed-password", authenticateUser, changedPassword_router);
 app.use("/get-pdf", authenticateUser, getPdfInPagination_router);
 app.use("/user", authenticateUser, logout_user_router);
+
+
+// render free service solution
+app.use("/hit", (req, res) => {
+  var hit = 1;
+  console.log("number of hit", hit);
+  hit++;
+  res.status(200).send({ message: hit });
+});
+
+setInterval(async function () {
+    try {
+        let url = "https://copy-right-backend.onrender.com/hit"
+        // let url = "http://localhost:3000/hit"
+        let response = await fetch(url);
+        let data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error);
+    }
+},  270000);
+
+
+// end here
 
 app.listen(port, () => console.log(`Server is running on ${port}........ `));
