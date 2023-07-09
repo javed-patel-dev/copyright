@@ -35,7 +35,7 @@ async function process(data) {
         return report;
       })
     );
-    console.log("Decrypted Data here", DecryptData);
+    
     return DecryptData;
   } catch (error) {
     console.error(error.message);
