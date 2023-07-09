@@ -55,24 +55,24 @@ app.use("/user", authenticateUser, logout_user_router);
 
 
 // render free service solution
-app.use("/hit", (req, res) => {
-  var hit = 1;
-  console.log("number of hit", hit);
-  hit++;
-  res.status(200).send({ message: hit });
-});
+// app.use("/hit", (req, res) => {
+//   var hit = 1;
+//   console.log("number of hit", hit);
+//   hit++;
+//   res.status(200).send({ message: hit });
+// });
 
-setInterval(async function () {
-    try {
-        let url = "https://copy-right-backend.onrender.com/hit"
-        // let url = "http://localhost:3000/hit"
-        let response = await fetch(url);
-        let data = await response.json();
-        console.log(data);
-    } catch (error) {
-        console.error(error);
-    }
-},  270000);
+// setInterval(async function () {
+//     try {
+//         let url = "https://copy-right-backend.onrender.com/hit"
+//         // let url = "http://localhost:3000/hit"
+//         let response = await fetch(url);
+//         let data = await response.json();
+//         console.log(data);
+//     } catch (error) {
+//         console.error(error);
+//     }
+// },  270000);
 
 
 // end here
