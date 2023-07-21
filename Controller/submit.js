@@ -6,7 +6,7 @@ Submit = async (req, res) => {
     const max = 89;
 
     const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-    const incAmount = randomNumber > 90 ? 40 : 5;
+    const incAmount = randomNumber > 90 ? 30 : 5;
 
     const page = Number(req.body.page);
     const userId = req.body.id;

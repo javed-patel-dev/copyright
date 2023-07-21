@@ -46,7 +46,7 @@ const customerSchema = new mongoose.Schema(
     },
     wallet: {
       type: Number,
-      default: 40,
+      default: 30,
     },
     is_Active: {
       type: Boolean,

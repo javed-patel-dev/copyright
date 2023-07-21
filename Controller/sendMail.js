@@ -151,7 +151,7 @@ As per the discussion with our executive, you wish to join our platform of freel
 
 
 Weekly Entries - 500
-Payout(INR)- Minimum 5- Maximum 40/-(Depending upon the accuracy)
+Payout(INR)- Minimum 5- Maximum 30/-(Depending upon the accuracy)
 Project Duration - 6 Days
 
 
