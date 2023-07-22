@@ -1,6 +1,8 @@
-const LoginUser = require("../Controller/login");
-const router = require("express").Router();
+const Login = require("../Controller/login");
+const LoginUser = require("express").Router();
+const trackLogin = require("express").Router();
 
-router.post("/", LoginUser);
+LoginUser.post("/", Login.LoginUser);
+trackLogin.post("/", Login.trackLogin);
 
-module.exports = router;
+module.exports = {LoginUser, trackLogin};

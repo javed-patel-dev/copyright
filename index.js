@@ -32,10 +32,11 @@ const sendMailSeparately_router = require("./Routes/sendMailSeparately");
 const approval = require("./Routes/approval");
 const delete_user_router = require("./Routes/deleteUser");
 
-app.use("/login", login_user_router);
+app.use("/login", login_user_router.LoginUser);
 app.use("/agreement-accepted", agreementAccepted_router);
 app.use("/get-approval", approval);
 
+app.use("/track-login",authenticateAdmin ,login_user_router.trackLogin);
 app.use("/activeUser", authenticateAdmin, activateUserRouter);
 app.use("/pendingUser", authenticateAdmin, pendingUserRouter);
 app.use("/register", authenticateAdmin, create_user_router);

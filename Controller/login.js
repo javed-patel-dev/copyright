@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 // const bcrypt = require("bcrypt");
 const { decryptPassword } = require("./passwordEncryptDecrypt");
+const mongoose = require("mongoose");
+const isValidObjectId = (id) => mongoose.Types.ObjectId.isValid(id);
 
 LoginUser = async (req, res) => {
   try {
@@ -56,7 +58,7 @@ LoginUser = async (req, res) => {
         aadharFront: user.aadharFront,
         aadharBack: user.aadharBack,
         signOfUser: user.signOfUser,
-        wallet : user.wallet,
+        wallet: user.wallet,
         completedWord: user.completedWork,
         pendingWork: user.pendingWork,
         isActive: user.is_Active,
@@ -70,4 +72,31 @@ LoginUser = async (req, res) => {
   }
 };
 
-module.exports = LoginUser;
+trackLogin = async (req, res) => {
+  try {
+    const { _id, isLoggedIn } = req.body;
+
+    if (!_id || typeof isLoggedIn !== "boolean" || !isValidObjectId(_id)) {
+      return res.status(200).send({ success: false, error: "Invalid request" });
+    }
+
+    if (isLoggedIn) {
+      const user = await Users.findByIdAndUpdate(_id, {
+        $set: { isLoggedIn: false },
+      });
+
+      if (!user) {
+        return res.status(200).send({ success: false, error: "User not found" });
+      }
+
+      return res.status(200).send({ success: true, message: "Logout successfully" });
+    } else {
+      return res.status(200).send({ success: true, message: "User is already logged out" });
+    }
+  } catch (error) {
+    res.status(500).send({ success: false, error: error.message });
+  }
+};
+
+
+module.exports = { LoginUser, trackLogin };
