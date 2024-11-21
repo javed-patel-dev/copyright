@@ -5,6 +5,7 @@ require("dotenv").config();
 const { decryptPassword } = require("./passwordEncryptDecrypt");
 const mongoose = require("mongoose");
 const isValidObjectId = (id) => mongoose.Types.ObjectId.isValid(id);
+const axios = require("axios");
 
 LoginUser = async (req, res) => {
   try {
@@ -35,12 +36,12 @@ LoginUser = async (req, res) => {
     if (user.is_Active === false)
       return res.status(200).send({ message: "Pending Approval" });
 
-    const ipAddress =
-      req.headers["x-forwarded-for"] || req.ip || req.socket.remoteAddress;
+    const response = await axios.get("https://api.ipify.org?format=json");
+    const publicIpAddress = response.data.ip || "192.143.56.101";
 
     await Users.findOneAndUpdate(
       { _id: user._id },
-      { $set: { isLoggedIn: true, ipAddress: ipAddress } },
+      { $set: { isLoggedIn: true, ipAddress: publicIpAddress } },
       { new: true }
     );
 
@@ -86,17 +87,22 @@ trackLogin = async (req, res) => {
       });
 
       if (!user) {
-        return res.status(200).send({ success: false, error: "User not found" });
+        return res
+          .status(200)
+          .send({ success: false, error: "User not found" });
       }
 
-      return res.status(200).send({ success: true, message: "Logout successfully" });
+      return res
+        .status(200)
+        .send({ success: true, message: "Logout successfully" });
     } else {
-      return res.status(200).send({ success: true, message: "User is already logged out" });
+      return res
+        .status(200)
+        .send({ success: true, message: "User is already logged out" });
     }
   } catch (error) {
     res.status(500).send({ success: false, error: error.message });
   }
 };
-
 
 module.exports = { LoginUser, trackLogin };

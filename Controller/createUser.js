@@ -8,7 +8,7 @@ const fs = require("fs");
 const { encryptPassword } = require("./passwordEncryptDecrypt");
 
 createUser = async (req, res) => {
-  let user
+  let user;
   try {
     let email = req.body.email;
     let { password, ...userData } = req.body;
@@ -37,7 +37,7 @@ createUser = async (req, res) => {
       .status(201)
       .send({ message: "Created User successfully and sent email" });
   } catch (err) {
-    if(user){
+    if (user) {
       await user.remove();
     }
     res.status(500).send({ message: err.message });
@@ -68,7 +68,7 @@ async function generatePDF(ejsFile) {
   return pdf;
 }
 
-async function sendAgreement(user , body) {
+async function sendAgreement(user, body) {
   try {
     let ejsData = {};
     ejsData.path = __dirname + "/../views/agreement.ejs";
@@ -90,7 +90,7 @@ async function sendAgreement(user , body) {
     fs.unlinkSync(__dirname + "/agreement.pdf");
   } catch (err) {
     console.log("Error sending email", err);
-    return { message: "Error sending email" }
+    return { message: "Error sending email" };
   }
 }
 

@@ -73,9 +73,9 @@
 const path = require("path");
 const fs = require("fs");
 const User = require("../Models/userSchema");
-const sgMail = require("@sendgrid/mail");
-const logger = require("winston");
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+// const sgMail = require("@sendgrid/mail");
+// const logger = require("winston");
+// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const nodemailer = require('nodemailer');
 
